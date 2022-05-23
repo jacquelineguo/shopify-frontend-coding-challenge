@@ -20,11 +20,11 @@ export default function FunWithAI() {
 
     let responses = JSON.parse(localStorage.getItem("responses") || "[]");
     if (isSuccess && !responses.some(i => i.Prompt === requestBody && i.Response === data?.choices[0]?.text)) {
-      responses.push({Prompt: requestBody, Response: data?.choices[0]?.text})
+      data.choices.forEach(choice => responses.push({Prompt: requestBody, Response: choice.text}));
       localStorage.setItem("responses", JSON.stringify(responses));
     }
     return <>
-      {responses.map(data =>
+      {responses.reverse().map(data =>
           <div className="card border-0 bg-secondary bg-opacity-10 mt-3 p-3">
               <div className="row">
                 <div className="col-2 fw-bold">
