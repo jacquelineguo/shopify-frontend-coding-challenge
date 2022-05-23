@@ -28,5 +28,6 @@ jobs:
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         REACT_APP_OPENAI_SECRET: ${{ secrets.REACT_APP_OPENAI_SECRET }}
+        OPENAI_SECRET: ${{ secrets.OPENAI_SECRET }}
         BRANCH: gh-pages
         FOLDER: build
