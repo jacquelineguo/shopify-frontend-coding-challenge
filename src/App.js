@@ -13,10 +13,6 @@ const queryClient = new QueryClient({
 })
 
 function App() {
-  const GetCompletions = () => {
-    console.log("clicked");
-  }
-
   return (
       <div>
         <QueryClientProvider client={queryClient}>

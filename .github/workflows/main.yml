@@ -20,7 +20,7 @@ jobs:
         npm install
         CI=false npm run build
       env:
-        OPENAI_SECRET: ${{ secrets.OPENAI_SECRET }}
+        REACT_APP_OPENAI_SECRET: ${{ secrets.REACT_APP_OPENAI_SECRET }}
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3

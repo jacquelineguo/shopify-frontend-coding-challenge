@@ -10,7 +10,7 @@ export default function FunWithAI() {
   const { isLoading, error, isSuccess, data } = useQuery(`getCompletions-${requestBody}`,
       () => getCompletions(requestBody),{
         refetchOnWindowFocus: false,
-        enabled: requestBody!=""
+        enabled: requestBody!==""
       }
   )
   console.log(error);
@@ -20,7 +20,7 @@ export default function FunWithAI() {
     if (error) return 'An error has occurred: ' + error.message
 
     let responses = JSON.parse(localStorage.getItem("responses") || "[]");
-    if (isSuccess && !responses.some(i => i.Prompt == requestBody && i.Response == data?.choices[0]?.text)) {
+    if (isSuccess && !responses.some(i => i.Prompt === requestBody && i.Response === data?.choices[0]?.text)) {
       responses.push({Prompt: requestBody, Response: data?.choices[0]?.text})
       localStorage.setItem("responses", JSON.stringify(responses));
     }
