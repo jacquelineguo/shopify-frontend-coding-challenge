@@ -13,7 +13,6 @@ export default function FunWithAI() {
         enabled: requestBody!==""
       }
   )
-  console.log(error);
 
   const renderResponse = () => {
     if (isLoading) return 'Loading...'
