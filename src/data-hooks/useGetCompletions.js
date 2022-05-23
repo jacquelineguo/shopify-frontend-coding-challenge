@@ -14,7 +14,7 @@ const getCompletions = (requestBody) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.REACT_APP_OPENAI_SECRET}`,
+      Authorization: `Bearer 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`,
     },
     body: JSON.stringify(data),
   }).then(res => res.json());
