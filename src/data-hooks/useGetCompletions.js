@@ -8,7 +8,7 @@ const getCompletions = (requestBody) => {
     frequency_penalty: 0.0,
     presence_penalty: 0.0,
   };
-  console.log("env", process.env.OPENAI_SECRET);
+  console.log("env REACT_APP_OPENAI_SECRET", process.env.REACT_APP_OPENAI_SECRET);
 
   return fetch("https://api.openai.com/v1/engines/text-curie-001/completions", {
     method: "POST",
