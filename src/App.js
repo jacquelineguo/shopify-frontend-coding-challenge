@@ -1,10 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
-import Row from 'react-bootstrap/Row';
-import {Container, Form} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { QueryClient, QueryClientProvider } from 'react-query'
-import ResponseCard from "./components/responseCard";
+import FunWithAI from "./components/FunWithAI";
 
 
 const queryClient = new QueryClient({
@@ -23,7 +20,7 @@ function App() {
   return (
       <div>
         <QueryClientProvider client={queryClient}>
-        <ResponseCard/>
+        <FunWithAI/>
         </QueryClientProvider>
       </div>
   );

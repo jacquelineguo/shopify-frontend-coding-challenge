@@ -4,7 +4,7 @@ import getCompletions from "../data-hooks/useGetCompletions";
 import {Container, Row, Col} from "react-bootstrap";
 
 
-export default function ResponseCard() {
+export default function FunWithAI() {
   const [input, setInput] = useState("");
   const [requestBody, setRequestBody] = useState("");
   const { isLoading, error, isSuccess, data } = useQuery(`getCompletions-${requestBody}`,
@@ -25,7 +25,7 @@ export default function ResponseCard() {
     }
     return <>
       {responses.map(data =>
-          <div className="card bg-light">
+          <div className="card border-0 bg-secondary bg-opacity-10 mt-3 p-3">
               <div className="row">
                 <div className="col-2 fw-bold">
                   Prompt:
@@ -60,7 +60,7 @@ export default function ResponseCard() {
   }
   return (<Container className="align-middle mt-lg-5">
     <Row>
-      <p class="fw-bold h1">
+      <p class="fw-bolder h1">
         Fun with AI
       </p>
     </Row>
@@ -82,9 +82,9 @@ export default function ResponseCard() {
         </button>
       </div>
     </Row>
-    <Row>
+    <Row className="mt-1">
       <Col>
-      <p class="fw-bold h3">
+      <p class="fw-bolder h3">
         Response
       </p>
       </Col>
