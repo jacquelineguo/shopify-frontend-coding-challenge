@@ -18,7 +18,7 @@ jobs:
     - name: Build
       run: |
         npm install
-        npm run-script build
+        npm run build
       env:
         OPENAI_SECRET: ${{ secrets.OPENAI_SECRET }}
 
