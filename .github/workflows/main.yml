@@ -13,7 +13,7 @@ jobs:
     steps:
     
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
 
     - name: Build
       run: |
@@ -23,7 +23,7 @@ jobs:
         REACT_APP_OPENAI_SECRET: ${{ secrets.REACT_APP_OPENAI_SECRET }}
 
     - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@releases/v3
+      uses: JamesIves/github-pages-deploy-action@releases/v4.3.3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         REACT_APP_OPENAI_SECRET: ${{ secrets.REACT_APP_OPENAI_SECRET }}
