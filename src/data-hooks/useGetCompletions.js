@@ -13,7 +13,7 @@ const getCompletions = (requestBody) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer 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`,
+      Authorization: `Bearer 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`,
     },
     body: JSON.stringify(data),
   }).then(res => res.json());

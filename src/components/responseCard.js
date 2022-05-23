@@ -1,25 +1,51 @@
 import { useState } from "react";
 import { useQuery } from 'react-query';
 import getCompletions from "../data-hooks/useGetCompletions";
-import Row from "react-bootstrap/Row";
-import {Container, Form} from "react-bootstrap";
+import {Container, Row, Col} from "react-bootstrap";
 
 
 export default function ResponseCard() {
   const [input, setInput] = useState("");
   const [requestBody, setRequestBody] = useState("");
-  const { isLoading, error, data, refetch } = useQuery('getCompletions',
+  const { isLoading, error, isSuccess, data } = useQuery(`getCompletions-${requestBody}`,
       () => getCompletions(requestBody),{
         refetchOnWindowFocus: false,
-        enabled: false
+        enabled: requestBody!=""
       }
   )
 
-  if (isLoading) return 'Loading...'
+  const renderResponse = () => {
+    if (isLoading) return 'Loading...'
+    if (error) return 'An error has occurred: ' + error.message
 
-  if (error) return 'An error has occurred: ' + error.message
-
-  console.log('res', data)
+    let responses = JSON.parse(localStorage.getItem("responses") || "[]");
+    if (isSuccess && !responses.some(i => i.Prompt == requestBody && i.Response == data?.choices[0]?.text)) {
+      responses.push({Prompt: requestBody, Response: data?.choices[0]?.text})
+      localStorage.setItem("responses", JSON.stringify(responses));
+    }
+    return <>
+      {responses.map(data =>
+          <div className="card bg-light">
+              <div className="row">
+                <div className="col-2 fw-bold">
+                  Prompt:
+                </div>
+                <div className="col-8">
+                  {data.Prompt}
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-2 fw-bold">
+                  Response:
+                </div>
+                <div className="col-8">
+                  {data.Response}
+                </div>
+              </div>
+            </div>
+    )}
+    </>
+  }
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -27,7 +53,10 @@ export default function ResponseCard() {
   }
   const handleClick = () => {
     setRequestBody(input);
-    refetch();
+  }
+  const handleClear = () => {
+    localStorage.removeItem('responses');
+    window.location.reload();
   }
   return (<Container className="align-middle mt-lg-5">
     <Row>
@@ -46,6 +75,7 @@ export default function ResponseCard() {
                         value={input}
                         onChange={handleChange}></textarea>
         <button type="submit"
+                disabled={isLoading}
                 className="btn btn-primary mt-sm-1 float-end btn-lg"
                 onClick={handleClick}>
           Submit
@@ -53,30 +83,22 @@ export default function ResponseCard() {
       </div>
     </Row>
     <Row>
+      <Col>
       <p class="fw-bold h3">
         Response
       </p>
+      </Col>
+
+      <Col>
+      <button type="submit"
+              className="btn btn-secondary float-end"
+              onClick={handleClear}>
+        Clear Responses
+      </button>
+    </Col>
     </Row>
     <Row>
-      <div class="card bg-light">
-        <div class="row">
-          <div class="col-2 fw-bold">
-            Prompt:
-          </div>
-          <div class="col-8">
-            {requestBody}
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-2 fw-bold">
-            Response:
-          </div>
-          <div className="col-8">
-            {data && <h1>{data.choices[0].text}</h1>}
-          </div>
-
-        </div>
-      </div>
+      {renderResponse()}
     </Row>
   </Container>
   )
