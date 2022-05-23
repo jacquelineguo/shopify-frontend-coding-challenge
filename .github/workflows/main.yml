@@ -20,7 +20,6 @@ jobs:
         npm ci
         CI=false npm run build
       env:
-        REACT_APP_OPENAI_SECRET: ${{ secrets.REACT_APP_OPENAI_SECRET }}
         OPENAI_SECRET: ${{ secrets.OPENAI_SECRET }}
 
     - name: Deploy
